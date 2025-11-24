@@ -13,17 +13,18 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: schema.sql
-      id: schema-sql
+    - name: Createenployee
+      id: createenployee
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: schema.sql
+        test-name: Createenployee
         setup-command: ''
-        command: schema,sql
+        command: plsql-f testschema.sql
         timeout: 10
+        max-score: 15
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
-        SCHEMA-SQL_RESULTS: "${{steps.schema-sql.outputs.result}}"
+        CREATEENPLOYEE_RESULTS: "${{steps.createenployee.outputs.result}}"
       with:
-        runners: schema-sql
+        runners: createenployee
